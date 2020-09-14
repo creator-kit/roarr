@@ -23,6 +23,7 @@
     "globalthis": "^1.0.1",
     "json-stringify-safe": "^5.0.1",
     "semver-compare": "^1.0.0",
+    "serialize-error": "^7.0.1",
     "sprintf-js": "^1.1.2"
   },
   "description": "JSON logger for Node.js and browser.",

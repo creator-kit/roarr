@@ -4,6 +4,9 @@ import environmentIsNode from 'detect-node';
 import createGlobalThis from 'globalthis';
 import stringify from 'json-stringify-safe';
 import {
+  serializeError,
+} from 'serialize-error';
+import {
   sprintf,
 } from 'sprintf-js';
 import {
@@ -117,11 +120,20 @@ const createLogger = (onMessage: MessageEventHandlerType, parentContext?: Messag
         throw new TypeError('Message must be a string.');
       }
 
-      context = JSON.parse(stringify({
+      const rawContext = {
         ...getFirstParentDomainContext(),
-        ...parentContext || {},
+        // eslint-disable-next-line no-extra-parens
+        ...(parentContext || {}),
         ...a,
-      }));
+      };
+
+      Object.entries(rawContext).forEach(([key, value]) => {
+        if (value instanceof Error) {
+          rawContext[key] = serializeError(value);
+        }
+      });
+
+      context = JSON.parse(stringify(rawContext));
 
       message = sprintf(b, c, d, e, f, g, h, i, k);
     }
