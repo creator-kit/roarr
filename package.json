@@ -64,7 +64,7 @@
     "json"
   ],
   "main": "./dist/log.js",
-  "name": "roarr",
+  "name": "@creator-kit/roarr",
   "nyc": {
     "include": [
       "src/**/*.js"
@@ -81,7 +81,7 @@
   "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
-    "url": "git@github.com:gajus/roarr.git"
+    "url": "git@github.com:creator-kit/roarr.git"
   },
   "scripts": {
     "build": "rm -fr ./dist && NODE_ENV=production babel ./src --out-dir ./dist --copy-files --source-maps && flow-copy-source src dist",
@@ -90,5 +90,6 @@
     "lint": "eslint ./src ./test && flow",
     "test": "NODE_ENV=test ava --serial --verbose"
   },
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
 }
